@@ -94,7 +94,7 @@ fn main() {
     // Usamos o vetor...
     usa_vetor(&vec);
 
-    // O vetor é liberado
+    // A memória é liberada
     // automaticamente
 }
 ```
@@ -105,7 +105,7 @@ fn main() {
 
 # Índice - O que vamos aprender
 
-1. A sintaxe de Rust;
+1. A Sintaxe de Rust;
     - Comparando com C e Python;
 2. Sistema de posse e empréstimo
     (*ownership & borrowing system*);
@@ -115,3 +115,41 @@ fn main() {
     (*blanket trait implementation*);
 
 ![bg right 70%](./img/happy-3d-ferris.png)
+
+---
+
+<!-- _header: '' -->
+
+# 1. A Sintaxe de Rust
+
+<div class="columns">
+<div>
+
+- Similar ao C;
+- Parênteses são opcionais e desencorajados;
+- `for` genérico ao invés de numérico;
+- `return` opcional na maioria dos casos;
+- Tipagem pós-fixada ao invés de prefixada;
+- Macros explícitos com `!`;
+
+</div>
+
+<div style="font-size: 2em">
+
+```rust
+fn cinco_ou_maior(x: i32) -> i32 {
+  if x > 5 { x } else { 5 }
+}
+
+fn main() {
+  for i in 0..10 {
+    println!(
+      "{}",
+      cinco_ou_maior(i)
+    );
+  }
+}
+```
+
+</div>
+</div>
