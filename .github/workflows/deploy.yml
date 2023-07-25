@@ -29,14 +29,14 @@ jobs:
         env:
           MARP_USER: root:root
         with:
-          args: Slides.md -o build/index.html
+          args: Slides.md -o build/index.html --html
 
       - name: Markdown to PDF
         uses: docker://marpteam/marp-cli:v3.0.2
         env:
           MARP_USER: root:root
         with:
-          args: Slides.md --allow-local-files -o build/README.pdf
+          args: Slides.md --allow-local-files -o build/README.pdf --html
 
       - name: Deploy production
         uses: JamesIves/github-pages-deploy-action@v4
