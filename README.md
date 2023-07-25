@@ -4,4 +4,6 @@ Minicurso apresentado na UFSJ durante a SECOMP 2023, que ocorreu (*ocorrerá*) e
 
 ## Acessando a apresentação
 
-Confira a apresentação no [**GitHub Pages**](https://syndelis.github.io/minicurso-rust-secomp-2023/).
+Confira a apresentação online no [**GitHub Pages**](https://syndelis.github.io/minicurso-rust-secomp-2023/).
+
+Ou baixe o [PDF aqui](https://github.com/Syndelis/minicurso-rust-secomp-2023/tree/gh-pages/README.pdf).
