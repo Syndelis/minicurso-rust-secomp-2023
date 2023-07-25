@@ -1,0 +1,45 @@
+name: Build PDF and Deploy to GitHub Pages
+concurrency: marp-to-pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Ensure build dir exists
+        run: mkdir -p build
+
+      - name: Copy images directory (if exists)
+        run: if [[ -d img ]]; then cp -R img build/img; fi
+
+      - name: Markdown to HTML
+        uses: docker://marpteam/marp-cli:v3.0.2
+        env:
+          MARP_USER: root:root
+        with:
+          args: Slides.md -o build/index.html
+
+      - name: Markdown to PDF
+        uses: docker://marpteam/marp-cli:v3.0.2
+        env:
+          MARP_USER: root:root
+        with:
+          args: Slides.md --allow-local-files -o build/README.pdf
+
+      - name: Deploy production
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: ./build/
