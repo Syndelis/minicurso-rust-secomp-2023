@@ -51,6 +51,7 @@ $ curl https://sh.rustup.sh | sh
 - Possui um gerenciador de pacotes oficial;
 - Impossibilita* condições de corrida e vazamento de memória;
 - É o inimigo № 1 do *Segmentation Fault*;
+  - Segurança e confiabilidade 🤝
 
 
 ![bg right 50%](./img/does_not_compile.svg)
@@ -118,9 +119,7 @@ fn main() {
 
 ---
 
-<!-- _header: '' -->
-
-# 1. A Sintaxe de Rust
+# 1. Um Resumo da Sintaxe
 
 <div class="columns">
 <div>
@@ -140,11 +139,13 @@ fn main() {
 fn cinco_ou_maior(x: i32) -> i32 {
   if x > 5 { x } else { 5 }
 }
+```
 
+```rust
 fn main() {
   for i in 0..10 {
     println!(
-      "{}",
+      "Valor: {}",
       cinco_ou_maior(i)
     );
   }
@@ -152,4 +153,90 @@ fn main() {
 ```
 
 </div>
+</div>
+
+---
+
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+# 1.1. Declaração de variáveis
+
+<div class="columns">
+<div>
+
+- Declaradas com `let`;
+- Apesar do nome, não são sempre "variáveis";
+  - Por padrão, são **imutáveis**;
+- Opcionalmente **mutáveis** com `mut`;
+- Podem ser "redefinidas", criando uma nova variável com o mesmo identificador;
+  - Dizemos que a variável foi "sombreada" (*shadowed*);
+- Tipos podem ser omitidos se *inferíveis*;
+
+</div>
+
+<div>
+
+<div>
+
+## Inválido —
+
+</div>
+
+<div style="font-size: 1.5em">
+
+```rust
+let x = 10;
+x = 20; // Erro!
+x += 1; // Erro!
+```
+
+</div>
+
+## Válido —
+
+<div class="columns" style="font-size: 2em">
+
+```rust
+let mut x = 10;
+x = 20;
+x += 1;
+```
+
+```rust
+let x = 10;
+let x = 20;
+let x = x + 1;
+```
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+---
+
+# 2. Posse vs. Empréstimo
+
+- Um dos aspectos mais complicados para iniciantes na linguagem;
+- É a "magia" por trás da segurança de Rust;
+
+<div style="font-size: 1.55em">
+
+```rust
+let x = vec![1, 2, 3]; // Dono do dado
+let y = x; // Passagem de posse
+
+let a = &x[0]; // Erro! `x` não é mais dona do dado!
+```
+
+```rust
+let x = vec![1, 2, 3];
+let y = &x; // Empréstimo
+
+let a = &x[0]; // OK
+```
+
 </div>
