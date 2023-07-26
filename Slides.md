@@ -238,3 +238,18 @@ let a = &x[0]; // OK
 ```
 
 </div>
+
+---
+
+# 3. Estruturas e Traços
+
+- Estruturas nos permitem agrupar e armazenar dados de maneira arbitrária;
+
+```rust
+struct Cpf([u8; 11]);
+
+struct Pessoa {
+  nome: String,
+  cpf: Cpf,
+}
+```
