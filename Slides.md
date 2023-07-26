@@ -14,8 +14,6 @@ style: |
   }
 ---
 
-<!-- _backgroundColor: #11111111 -->
-<!-- _color: #DEDEDE -->
 <!-- _header: '' -->
 <!-- _footer: '' -->
 <!-- _paginate: false -->
