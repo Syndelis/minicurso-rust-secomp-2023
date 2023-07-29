@@ -53,15 +53,15 @@ style: |
 
 ---
 
-# Antes de mais nada
+# Antes de começarmos
 
-## Instale Rust e participe do *live-coding*
+## Instale Rust para fazer os exercícios
 
 ```sh
 $ curl https://sh.rustup.sh | sh
 ```
 
-![bg left 50%](./img/rust-logo-white.png)
+![bg left:35%](./img/rust-bg-2.png)
 
 ---
 
@@ -73,8 +73,7 @@ $ curl https://sh.rustup.sh | sh
 - É o inimigo № 1 do *Segmentation Fault*;
   - Segurança e confiabilidade 🤝
 
-
-![bg right 50%](./img/does_not_compile.svg)
+![bg right:33%](./img/beach+ferris-bg.jpg)
 
 ---
 
@@ -135,7 +134,8 @@ fn main() {
 4. Implementação "cobertor"
     (*blanket trait implementation*);
 
-![bg right 70%](./img/happy-3d-ferris.png)
+![bg right:36%](./img/happy-3d-ferris.png)
+
 
 ---
 
