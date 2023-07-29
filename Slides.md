@@ -12,6 +12,28 @@ style: |
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
+
+  .unequal-columns {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 1rem;
+  }
+
+  .column-23 {
+    grid-column: 1 / 3;
+  }
+
+  .column-13 {
+    grid-column: 3 / 3;
+  }
+
+  .column-34 {
+    grid-column: 1 / 4;
+  }
+
+  .column-14 {
+    grid-column: 4 / 4;
+  }
 ---
 
 <!-- _header: '' -->
@@ -43,7 +65,7 @@ $ curl https://sh.rustup.sh | sh
 
 ---
 
-# Por quê Rust?
+# Por que Rust?
 
 - Padrão único de organização estrutural;
 - Possui um gerenciador de pacotes oficial;
@@ -238,6 +260,48 @@ let a = &x[0]; // OK
 ```
 
 </div>
+
+---
+
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+# 2.1. A Importância do Gerenciamento de Memória Automático
+
+Você consegue dizer qual linha causará um erro?
+
+<div class="unequal-columns">
+
+<div class="column-34" style="font-size: 3rem">
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+  int *a = (int*)malloc(sizeof(int) * 10);
+  int *b = a;
+
+  free(a);
+
+  printf("%d\n", a[5]);
+  printf("%d\n", b[9]);
+
+  free(b);
+}
+```
+
+</div>
+
+<div class="column-14">
+
+## Responda <br> aqui
+
+![width:240px](./img/qr-question-c-segfault.svg)
+
+</div>
+</div>
+
 
 ---
 
