@@ -238,6 +238,129 @@ let x = x + 1;
 
 ---
 
+# Exercício 1: Caixa eletrônico
+
+Dado um valor inteiro X que o usuário deseja sacar, imprima no terminal a quantidade de notas de cada valor para que o saque seja realizado.
+
+<div class="unequal-columns">
+
+<div class="column-34">
+
+### Lendo valores do terminal
+
+```rust
+fn main() {
+  let mut ent = String::new();
+  std::io::stdin().read_line(&mut ent);
+
+  let x: i32 = ent.trim().parse().unwrap();
+
+  println!("Você digitou {x}");
+}
+```
+
+</div>
+
+<div class="column-14">
+
+### Compile e Execute
+
+```sh
+$ rustc caixa.rs
+$ ./caixa
+```
+
+</div>
+
+</div>
+
+---
+
+# Apêndice 1: Sobre leitura de dados do terminal
+
+Por que tantos comandos foram usados para ler um inteiro do terminal?
+
+<div class="unequal-columns">
+
+<div class="column-23">
+
+```rust
+// Rust
+fn main() {
+  let mut ent = String::new();
+  std::io::stdin().read_line(&mut ent);
+
+  let x: i32 = ent.trim().parse().unwrap();
+
+  println!("Você digitou {x}");
+}
+```
+
+</div>
+
+<div class="column-13">
+
+```c
+// C
+#include <stdio.h>
+int main() {
+  int x;
+  scanf("%d", &x);
+
+  printf("Você digitou %d\n", x);
+
+}
+```
+
+</div>
+
+</div>
+
+---
+
+# Apêndice 1.1: Simples, Segurança!
+
+```c
+// C
+#include <stdio.h>
+int main() {
+  int x;
+
+  // Em caso de erro, `scanf` retorna `1` e coloca `0` no valor
+  // da variável
+  scanf("%d", &x);
+
+  printf("Você digitou %d\n", x);
+
+}
+```
+
+
+```sh
+❯ gcc scanf-test.c -o scanf-test
+❯ ./scanf-test
+asd
+Você digitou 0
+```
+
+---
+
+# Apêndice 1.1.1: Quando estiver desenvolvendo em C, leia o manual!
+
+```sh
+$ man scanf
+```
+
+> **SYNOPSIS**
+  `#include <stdio.h>`
+  `int scanf(const char *restrict format, ...);`
+
+
+> **RETURN VALUE**
+  On success, these functions return the number of input items successfully matched and  assigned;  this can be fewer than provided for, **or even zero, in the event of an early matching failure.**
+
+---
+
 # 2. Posse vs. Empréstimo
 
 - Um dos aspectos mais complicados para iniciantes na linguagem;
