@@ -71,7 +71,7 @@ $ curl https://sh.rustup.sh | sh
 - Possui um gerenciador de pacotes oficial;
 - Impossibilita* condições de corrida e vazamento de memória;
 - É o inimigo № 1 do *Segmentation Fault*;
-  - Segurança e confiabilidade 🤝
+  - **Segurança e Confiabilidade** 🤝
 
 ![bg right:33%](./img/beach+ferris-bg.jpg)
 
@@ -240,7 +240,7 @@ let x = x + 1;
 
 # Exercício 1: Caixa eletrônico
 
-Dado um valor inteiro X que o usuário deseja sacar, imprima no terminal a quantidade de notas de cada valor para que o saque seja realizado.
+Dado um valor inteiro X que o usuário deseja sacar, imprima no terminal a quantidade de notas de cada valor para que o saque seja realizado. Considere os valores de notas do Brasil: R$ **200**, R$ **100**, R$ **50**, R$ **20**, R$ **10**, R$ **5** e R$ **2**.
 
 <div class="unequal-columns">
 
@@ -276,7 +276,7 @@ $ ./caixa
 
 ---
 
-# Apêndice 1: Sobre leitura de dados do terminal
+# Apêndice 1.1: Sobre leitura de dados do terminal
 
 Por que tantos comandos foram usados para ler um inteiro do terminal?
 
@@ -345,7 +345,7 @@ Você digitou 0
 
 ---
 
-# Apêndice 1.1.1: Quando estiver desenvolvendo em C, leia o manual!
+# Apêndice 1.1.1: Quando estiver desenvolvendo em **C**, leia o manual!
 
 ```sh
 $ man scanf
@@ -358,6 +358,30 @@ $ man scanf
 
 > **RETURN VALUE**
   On success, these functions return the number of input items successfully matched and  assigned;  this can be fewer than provided for, **or even zero, in the event of an early matching failure.**
+
+---
+
+<!-- _footer: '' -->
+
+# Apêndice 1.2: Macros explícitos? Por quê?
+
+Neste ponto do curso você deve estar se perguntando por que que para imprimir no terminal usamos uma "função" que tem um `!` no nome.
+
+Diferentemente de `printf` do C, `println!` é um macro, e em Rust, macros (macro-funções, mais especificamente) são pós-fixados de `!`.
+
+Para entender o porquê, vejamos esse exemplo de código em C e sua saída.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+#define max(a, b) (a) > (b) ? (a) : (b)
+
+int main() {
+    for (int i = 0; i < 10; i++)
+        printf("%d\n", max(rand()%10, 5));
+}
+```
 
 ---
 
@@ -389,7 +413,7 @@ let a = &x[0]; // OK
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-# 2.1. A Importância do Gerenciamento de Memória Automático
+# 2.1. Comparativo com **C**: Por que **Rust** é chato sobre posse e empréstimo?
 
 Você consegue dizer qual linha causará um erro?
 
@@ -408,6 +432,7 @@ int main() {
   free(a);
 
   printf("%d\n", a[5]);
+  b[9] = 10;
   printf("%d\n", b[9]);
 
   free(b);
@@ -425,12 +450,39 @@ int main() {
 </div>
 </div>
 
+---
+
+![bg fit](./img/memory-model-pointers.svg)
 
 ---
 
-# 3. Estruturas e Traços
+# Exercício 2: Caixa eletrônico com notas faltantes
+
+Baseando-se no exerício 1, altere o código do seu caixa eletrônico e remova as notas de R$ 100 e R$ 10 reais.
+
+Sempre que o programa começar, avise ao usuário quais são as notas disponíveis.
+
+Use funções para listar as notas disponíveis e para calcular as notas usadas no saque.
+
+---
+
+# 2.2. Empréstimo Único vs. Empréstimo Compartilhado
+
+- ## Temos duas formas de emprestar valores em Rust;
+  - ### `&` são referências imutáveis (ou compartilhadas);
+  - ### `&mut` são refernências mutáveis (ou únicas);
+- ## É permitido que existam, ao mesmo tempo, **infinitas** referências compartilhadas **ou** **uma** referência única;
+- Por quê? Para evitar **condições de corrida** em ambientes **paralelizados**;
+
+---
+
+# 3. Estruturas e Implementações
 
 - Estruturas nos permitem agrupar e armazenar dados de maneira arbitrária;
+
+<div class="unequal-columns">
+
+<div class="column-23" style="font-size: 2em">
 
 ```rust
 struct Cpf([u8; 11]);
@@ -440,3 +492,56 @@ struct Pessoa {
   cpf: Cpf,
 }
 ```
+
+</div>
+
+<div class="column-13">
+
+- Dizemos que `Cpf` é uma
+"estrutura-tupla" (*tuple-struct*);
+  - `Cpf` possui um array de 11
+  elementos inteiros sem sinal
+  de 8 bits;
+
+</div>
+
+</div>
+
+---
+
+<!-- _header: '' -->
+
+# 3.1. Implementações
+
+Implementações nos permitem associar código a determinadas estruturas. Você pode pensar em implementações como paralelos a métodos em linguagens Orientadas a Objetos; a diferença é que estrutura e código são definidos em blocos diferentes.
+
+<div class="columns">
+
+<div style="font-size: 1.5em">
+
+```rust
+struct Pessoa {
+  nome: String,
+  sobrenome: String,
+}
+```
+
+</div>
+
+<div style="font-size: 1.2em">
+
+```rust
+impl Pessoa {
+  fn nome_completo(
+    &self
+  ) -> String {
+    format!("{} {}",
+      self.nome,
+      self.sobrenome
+    )
+  }
+}
+```
+
+</div>
+</div>
