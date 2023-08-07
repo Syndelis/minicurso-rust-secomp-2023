@@ -129,8 +129,8 @@ fn main() {
     - Comparando com C e Python;
 2. Sistema de posse e empréstimo
     (*ownership & borrowing system*);
-3. Estruturas e traços
-    (*structs & traits*);
+3. Estruturas, enumeradores e traços
+    (*structs, enums & traits*);
 4. Implementação "cobertor"
     (*blanket trait implementation*);
 
@@ -447,6 +447,14 @@ int main() {
 
 ![width:240px](./img/qr-question-c-segfault.svg)
 
+Ou no link:
+
+<div style="font-size: 0.4em">
+
+[secomp.brenno.codes/question/c-segfault](https://secomp.brenno.codes/question/c-segfault)
+
+</div>
+
 </div>
 </div>
 
@@ -544,4 +552,139 @@ impl Pessoa {
 ```
 
 </div>
+</div>
+
+---
+
+# Exercício 3: TODO
+
+---
+
+# 3.2. Enumeradores
+
+Em Rust, o `enum` é o que chamamos de união discriminada (*tagged union*). Com ele, é possível definir não somente um nome para um valor constante, mas também incluir valores nas variantes do enumerador.
+
+```rust
+enum FormaGeometrica {
+  Circulo { raio: f32 },
+  Quadrado { lado: f32 },
+  Retangulo { altura: f32, largura: f32 },
+}
+```
+
+---
+
+# 3.2. Acessando enumeradores
+
+<div class="unequal-columns">
+
+<div class="column-23">
+
+```rust
+fn main() {
+  let mut entrada = String::new();
+  let stdin = std::io::stdin();
+
+  stdin.read_line(&mut entrada);
+
+  let x = entrada.trim().parse::<i32>();
+
+  match x {
+    Ok(x) => println!("x é {x}"),
+    Err(e) => println!("Erro: {e}"),
+  }
+}
+```
+
+</div>
+
+<div class="column-13" style="text-align: justify">
+
+Antes de acessarmos o
+valor de um enum, é
+necessário discriminar
+a variante.
+
+Podemos fazer isso de
+várias maneiras, sendo
+a mais comum com o
+comando `match`.
+
+</div>
+
+</div>
+
+---
+
+# *Mini* Exercício 4: Calculando a área das figuras geométricas
+
+TODO
+
+---
+
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+# Apéndice 3.1: *Tagged Unions* em C e C++
+
+<div class="columns">
+
+<div>
+
+### **C**
+
+```c
+#include <stdio.h>
+
+typedef struct {
+  enum { RETANGULO, QUADRADO, CIRCULO } tipo;
+  union {
+    struct { float altura, largura; } retangulo;
+    struct { float lado; } quadrado;
+    struct { float raio; } circulo;
+  };
+} FiguraGeometrica;
+
+int main() {
+  FiguraGeometrica fig = {
+    .tipo = QUADRADO,
+    .quadrado = { .lado = 2.0 }
+  };
+
+  printf("%.2f\n", fig.quadrado.lado);
+}
+```
+
+</div>
+
+<div>
+
+### **C++17**
+
+```cpp
+#include <iostream>
+#include <variant>
+
+struct Retangulo { int largura, altura; };
+struct Quadrado { int lado; };
+struct Circulo { int raio; };
+
+using FiguraGeometrica = std::variant<
+  Retangulo, Quadrado, Circulo
+>;
+
+int main() {
+  auto fig = FiguraGeometrica {
+    Retangulo { .largura = 10, .altura = 20 }
+  };
+
+  std::cout
+  << "largura: "
+  << std::get<Retangulo>(fig).largura
+  << std::endl;
+}
+```
+
+</div>
+
 </div>
