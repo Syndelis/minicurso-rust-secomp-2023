@@ -129,10 +129,10 @@ fn main() {
     - Comparando com C e Python;
 2. Sistema de posse e empréstimo
     (*ownership & borrowing system*);
-3. Estruturas, enumeradores e traços
-    (*structs, enums & traits*);
-4. Implementação "cobertor"
-    (*blanket trait implementation*);
+3. Estruturas, enumeradores e implementações
+    (*structs, enums & impl*);
+4. Traços (*traits*);
+5. Monomorfismo e Polimorfismo;
 
 ![bg right:36%](./img/happy-3d-ferris.png)
 
@@ -688,3 +688,136 @@ int main() {
 </div>
 
 </div>
+
+---
+
+# 4. Traços
+
+Como vimos anteriormente, Rust não é uma linguagem Orientada a Objetos. Contudo, ela oferece um recurso familiar aos programadores **OO** para a reutilização de código (*dentro de inúmeras outras funções*): os traços.
+
+Traços descrevem uma série de métodos que devem ser implementados por uma **struct** ou **enum**. 
+
+---
+
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+# 4.1. O esqueleto de um traço
+
+<div class="columns">
+
+<div>
+
+```rust
+trait Animal {
+  fn ameacar(&self);
+}
+
+struct Cachorro;
+
+struct Gato;
+
+impl Animal for Cachorro {
+  fn ameacar(&self) {
+    println!("Grrr");
+  }
+}
+
+impl Animal for Gato {
+  fn ameacar(&self) {
+    println!("Hiss");
+  }
+}
+```
+
+</div>
+
+<div>
+
+```rust
+fn main() {
+  let c = Cachorro;
+  let g = Gato;
+
+  c.ameacar();
+  g.ameacar();
+}
+```
+
+</div>
+
+</div>
+
+
+---
+
+# 4.2. Implementações padrão
+
+Traços também podem provir implementações padrão para os métodos especificados, de tal forma que não seja necessário re-implementá-los para todas as estruturas que quiserem implementá-los.
+
+```rust
+trait Animal {
+  fn ameacar(&self);
+  fn ameacar_e_atacar(&self) {
+    self.ameacar();
+    println!("Slash!");
+  }
+}
+```
+
+Neste exemplo, tanto as estruturas `Cachorro` e `Gato` terão o método `.ameacar_e_atacar` auto-definido.
+
+---
+
+# 4.3. Macros `derive`
+
+<!-- _header: '' -->
+
+Vimos previamente que funções pós-fixadas com `!` são funções-macro. Em Rust, 3 tipos de macro existem, no total, sendo um dos mais importantes o `derive`.
+
+<div class="columns">
+
+<div>
+
+```rust
+fn main() {
+  let c = Carro {
+    modelo: "Fusca",
+    numero_portas: 2
+  };
+
+  dbg!(c); // Imprime `Carro { ... }`
+}
+
+#derive[Debug]
+struct Carro {
+  modelo: String,
+  numero_portas: i32,
+}
+```
+
+</div>
+
+<div>
+
+Estes macros comumente são utilizados para prover funcionalidades trivialmente implementáveis. Exemplos:
+
+- `Debug`: Possibilita impressão dos dados da estrutura;
+- `Eq`: Possibilita comparação de igualidade entre estruturas;
+- `Hash`: Possibilita que a estrutura seja usada como chave de `HashMap`;
+
+</div>
+
+</div>
+
+---
+
+# *Mini* Exercício 5: Printando nossa estrutura com `Display` e `Debug`
+
+Faça uma estrutura que represente um aluno, com pelo menos 3 campos de tipos diferentes. Utilize o `derive` para implementar `Debug` na estrutura e realizar a impressão de depuração.
+
+Após isso, implemente `Display` para definir como um aluno deve ser apresentado no SIGAA. Siga este template para a impressão:
+
+```
+Olá, {aluno.nome}. Sua matrícula é {aluno.matricula}.
+```
