@@ -619,7 +619,7 @@ comando `match`.
 
 # *Mini* Exercício 4: Calculando a área das figuras geométricas
 
-TODO
+Escreva uma implementação para o `enum` **FormaGeometrica** que imprima a área da forma no terminal.
 
 ---
 
