@@ -68,6 +68,7 @@ $ curl https://sh.rustup.sh | sh
 # Por que Rust?
 
 - Padrão único de organização estrutural;
+  - Manutenibilidade;
 - Possui um gerenciador de pacotes oficial;
 - Impossibilita* condições de corrida e vazamento de memória;
 - É o inimigo № 1 do *Segmentation Fault*;
@@ -240,7 +241,7 @@ let x = x + 1;
 
 # Exercício 1: Caixa eletrônico
 
-Dado um valor inteiro X que o usuário deseja sacar, imprima no terminal a quantidade de notas de cada valor para que o saque seja realizado. Considere os valores de notas do Brasil: R$ **200**, R$ **100**, R$ **50**, R$ **20**, R$ **10**, R$ **5** e R$ **2**.
+Dado um valor inteiro X que o usuário deseja sacar, imprima no terminal a quantidade de cédulas de cada valor para que o saque seja realizado. Considere todas as cédulas disponíveis no Brasil: R$ **200**, R$ **100**, R$ **50**, R$ **20**, R$ **10**, R$ **5** e R$ **2**.
 
 <div class="unequal-columns">
 
@@ -464,13 +465,13 @@ Ou no link:
 
 ---
 
-# Exercício 2: Caixa eletrônico com notas faltantes
+# Exercício 2: Caixa eletrônico com cédulas em falta
 
-Baseando-se no exerício 1, altere o código do seu caixa eletrônico e remova as notas de R$ 100 e R$ 10 reais.
+Baseando-se no exerício 1, altere o código do seu caixa eletrônico e remova as cédulas de R$ 100 e R$ 10 reais.
 
-Sempre que o programa começar, avise ao usuário quais são as notas disponíveis.
+Sempre que o programa começar, avise ao usuário quais são as cédulas disponíveis.
 
-Use funções para listar as notas disponíveis e para calcular as notas usadas no saque.
+Use funções para listar as cédulas disponíveis e para calcular as cédulas entregues no saque.
 
 ---
 
@@ -478,7 +479,7 @@ Use funções para listar as notas disponíveis e para calcular as notas usadas 
 
 - ## Temos duas formas de emprestar valores em Rust;
   - ### `&` são referências imutáveis (ou compartilhadas);
-  - ### `&mut` são refernências mutáveis (ou únicas);
+  - ### `&mut` são referências mutáveis (ou únicas);
 - ## É permitido que existam, ao mesmo tempo, **infinitas** referências compartilhadas **ou** **uma** referência única;
 - Por quê? Para evitar **condições de corrida** em ambientes **paralelizados**;
 
