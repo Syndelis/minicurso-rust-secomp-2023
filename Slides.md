@@ -444,15 +444,11 @@ int main() {
 
 <div class="column-14">
 
-## Responda <br> aqui
+## Dica
 
-![width:240px](./img/qr-question-c-segfault.svg)
-
-Ou no link:
-
-<div style="font-size: 0.4em">
-
-[secomp.brenno.codes/question/c-segfault](https://secomp.brenno.codes/question/c-segfault)
+Compile com
+`-fsanitize=address`
+para evitar surpresas.
 
 </div>
 
