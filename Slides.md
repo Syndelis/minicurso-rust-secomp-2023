@@ -553,7 +553,12 @@ impl Pessoa {
 
 ---
 
-# Exercício 3: TODO
+# Exercício 3: Cadastro de Usuário
+
+Crie uma struct que represente um usuário com nome e e-mail e implemente os seguintes métodos:
+
+- Um método para imprimir no terminal o usuário no formato 'nome \<e-mail>';
+- Um método para registrar um novo usuário a partir de leitura do terminal;
 
 ---
 
