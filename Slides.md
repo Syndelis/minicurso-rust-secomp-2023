@@ -823,3 +823,149 @@ Após isso, implemente `Display` para definir como um aluno deve ser apresentado
 ```
 Olá, {aluno.nome}. Sua matrícula é {aluno.matricula}.
 ```
+
+---
+
+# 5. Escrevendo código reutilizável
+
+Como vimos anteriormente, uma maneira fácil de escrever código reutilizável é agrupar "tipos" que aceitam operações em comum num enumerador, como no caso de **FiguraGeometrica**.
+
+Contudo, existem certas ocasiões nas quais é preferível a utilização de estruturas e traços para agrupar operações em comum.
+
+Neste capítulo, veremos como podemos escrever funções, estruturas e traços que aceitem múltiplos tipos diferentes baseados no comportamento dos tipos aceitáveis.
+
+---
+
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+# 5.1. Tipos Genéricos | Monomorfismo
+
+Rust oferece tipos genéricos de forma similar a C++ ou Java. Com estes tipos, é possível escrever funções que atuam em múltiplos tipos de dados diferentes, contanto que estes tipos de dados possuam alguma funcionalidade em comum.
+
+```rust
+use std::fmt::Display;
+
+fn imprime_array<T: Display>(arr: &[T]) {
+  for (i, t) in arr.iter().enumerate() {
+    println!("{i}: {t}")
+  }
+}
+
+fn main() {
+  let x = [10, 20, 30, 40];
+  imprime_array(&x);
+  let y = ["Olá", "Mundo"];
+  imprime_array(&y);
+}
+```
+
+---
+
+<!-- _header: '' -->
+
+# 5.1.1. Monomorfismo em estruturas
+
+<div class="columns">
+
+<div>
+
+```rust
+struct Cliente<M: MeioDeContato> {
+  nome: String,
+  contato: M
+}
+
+trait MeioDeContato {
+  fn envia_mensagem(
+    &self, mensagem: String
+  );
+}
+
+struct Email(String);
+struct Celular {
+  ddd: [2; u8],
+  numero: [9; u8]
+}
+```
+
+</div>
+
+<div>
+
+```rust
+impl MeioDeContato for Email {
+  fn envia_mensagem(
+    &self, mensagem: String
+  ) {
+    envia_email(&self.0, mensagem);
+  }
+}
+
+impl MeioDeContato for Celular {
+  fn envia_mensagem(
+    &self, mensagem: String
+  ) {
+    envia_sms(
+      &self.ddd,
+      &self.numero,
+      &mensagem[..=256]
+    );
+  }
+}
+```
+
+</div>
+
+</div>
+
+---
+
+# 5.1.2. Monomorfismo em enumeradores
+
+<div style="font-size: 1.8em">
+
+```rust
+enum Result<T, E> {
+  Ok(T),
+  Err(E),
+}
+```
+
+</div>
+
+---
+
+# 5.1.3. Monomorfismo em traços
+
+<!-- _header: '' -->
+<!-- _footer: '' -->
+
+TODO
+
+```rust
+use std::{fmt::Display, iter::IntoIterator};
+
+fn main() {
+  [10, 20, 30].imprime();
+  ["Olá", "Mundo!"].imprime();
+}
+
+trait Imprime {
+  fn imprime(self);
+}
+
+impl<T: Display, It: IntoIterator<Item = T>> Imprime for It {
+  fn imprime(self) {
+    for i in self.into_iter() {
+      println!("{i}");
+    }
+  }
+}
+```
+
+---
+
+# 5.3. Polimorfismo e *type erasure*
+
+TODO
