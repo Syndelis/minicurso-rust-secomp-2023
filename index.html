@@ -2812,7 +2812,7 @@ comando <code>match</code>.</p>
   grid-column: 4 / 4;
 }
 ;">
-<h1 id="511-monomorfismo-em-estruturas">5.1.1. Monomorfismo em estruturas</h1>
+<h1 id="511-tipos-gen%C3%A9ricos-em-estruturas">5.1.1. Tipos Genéricos em estruturas</h1>
 <div class="columns">
 <div>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-rust"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Cliente</span>&lt;M: MeioDeContato&gt; {
@@ -2914,9 +2914,14 @@ comando <code>match</code>.</p>
 }
 ;">
 <header>UFSJ | Secomp 2023</header>
-<h1 id="512-monomorfismo-em-enumeradores">5.1.2. Monomorfismo em enumeradores</h1>
+<h1 id="512-tipos-gen%C3%A9ricos-em-enumeradores">5.1.2. Tipos Genéricos em enumeradores</h1>
 <div style="font-size: 1.8em">
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-rust"><span class="hljs-keyword">enum</span> <span class="hljs-title class_">Result</span>&lt;T, E&gt; {
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-rust"><span class="hljs-keyword">enum</span> <span class="hljs-title class_">Option</span>&lt;T&gt; {
+  <span class="hljs-title function_ invoke__">Some</span>(T),
+  <span class="hljs-literal">None</span>,
+}
+
+<span class="hljs-keyword">enum</span> <span class="hljs-title class_">Result</span>&lt;T, E&gt; {
   <span class="hljs-title function_ invoke__">Ok</span>(T),
   <span class="hljs-title function_ invoke__">Err</span>(E),
 }
@@ -2979,9 +2984,9 @@ comando <code>match</code>.</p>
   grid-column: 4 / 4;
 }
 ;">
-<h1 id="513-monomorfismo-em-tra%C3%A7os">5.1.3. Monomorfismo em traços</h1>
+<h1 id="513-tipos-gen%C3%A9ricos-em-tra%C3%A7os">5.1.3. Tipos Genéricos em traços</h1>
 
-<p>TODO</p>
+<p>Tipos Genéricos podem ser utilizados para implementar traços automaticamente.</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-rust"><span class="hljs-keyword">use</span> std::{fmt::Display, iter::<span class="hljs-built_in">IntoIterator</span>};
 
 <span class="hljs-keyword">fn</span> <span class="hljs-title function_">main</span>() {
