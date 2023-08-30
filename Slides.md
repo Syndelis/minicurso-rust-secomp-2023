@@ -864,7 +864,7 @@ fn main() {
 
 <!-- _header: '' -->
 
-# 5.1.1. Monomorfismo em estruturas
+# 5.1.1. Tipos Genéricos em estruturas
 
 <div class="columns">
 
@@ -921,11 +921,16 @@ impl MeioDeContato for Celular {
 
 ---
 
-# 5.1.2. Monomorfismo em enumeradores
+# 5.1.2. Tipos Genéricos em enumeradores
 
 <div style="font-size: 1.8em">
 
 ```rust
+enum Option<T> {
+  Some(T),
+  None,
+}
+
 enum Result<T, E> {
   Ok(T),
   Err(E),
@@ -936,12 +941,12 @@ enum Result<T, E> {
 
 ---
 
-# 5.1.3. Monomorfismo em traços
+# 5.1.3. Tipos Genéricos em traços
 
 <!-- _header: '' -->
 <!-- _footer: '' -->
 
-TODO
+Tipos Genéricos podem ser utilizados para implementar traços automaticamente. 
 
 ```rust
 use std::{fmt::Display, iter::IntoIterator};
