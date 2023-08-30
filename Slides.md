@@ -971,6 +971,22 @@ impl<T: Display, It: IntoIterator<Item = T>> Imprime for It {
 
 ---
 
-# 5.3. Polimorfismo e *type erasure*
+<!-- _header: '' -->
+<!-- _footer: '' -->
 
-TODO
+# 5.3. Polimorfismo (*type erasure*)
+
+É possível **apagar** as informações de um tipo por meio de ponteiros (`Box`) ou referências. Quando usados, é possível omitir o tamanho que um tipo ocupa na pilha (*stack*) e, portanto, não permitem que acessemos os campos internos quando utilizados.
+
+Por este motivo, é necessário definir operações que podem ser utilizadas por meio de traços
+
+```rust
+fn main() {
+    imprime(&4);
+    imprime(&"Olá");
+}
+
+fn imprime(obj: &dyn std::fmt::Display) {
+    println!("{}", obj);
+}
+```
