@@ -13,6 +13,16 @@ style: |
     gap: 1rem;
   }
 
+  .three-columns {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    gap: 1rem;
+  }
+
+  .centered {
+    text-align: center;
+  }
+
   .unequal-columns {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -62,6 +72,42 @@ $ curl https://sh.rustup.sh | sh
 ```
 
 ![bg left:35%](./img/rust-bg-2.png)
+
+---
+
+<div class="centered">
+
+# Aprenda Rust!
+
+</div>
+
+<div class="three-columns">
+
+<div class="centered">
+
+[secomp2023.brenno.codes](https://secomp2023.brenno.codes)
+
+![w:280px](./img/qr-slides.svg)
+
+</div>
+
+<div class="centered">
+
+["O Livro"](https://doc.rust-lang.org/book/)
+
+![w:280px](./img/qr-the-book.svg)
+
+</div>
+
+<div class="centered">
+
+[Rustlings](https://rustlings.cool)
+
+![w:280px](./img/qr-rustlings.svg)
+
+</div>
+
+</div>
 
 ---
 
