@@ -170,6 +170,37 @@ fn main() {
 
 ---
 
+# O que fazer com Rust?
+
+<div class="columns">
+
+<div>
+
+- CLIs;
+  - Bibliotecas: *Clap*;
+- Sistemas Operacionais;
+- Backend e Frontend Web;
+  - Bibliotecas: *Axum*, *Yew*, *Leptos*;
+- Jogos;
+  - Bibliotecas: *Bevy*;
+
+</div>
+
+<div>
+
+- *Data Science*;
+  - Bibliotecas: *Polars*, *ndarray*;
+- Shaders:
+  - Bibliotecas: *rust-gpu*;
+- Sistemas embarcados;
+- Muitas outras aplicações...
+
+</div>
+
+</div>
+
+---
+
 # Índice - O que vamos aprender
 
 1. A Sintaxe de Rust;
