@@ -523,7 +523,7 @@ int main() {
 
 ## Dica
 
-Compile com
+Em **C**, Compile com
 `-fsanitize=address`
 para evitar surpresas.
 
